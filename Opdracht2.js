@@ -1,10 +1,6 @@
 // * **Opdracht 2a:** Hoeveel tv's zijn er al verkocht? Schrijf een script dat dit berekent. Log de uitkomst in de console.
 const amountOfTvsSold = inventory.map((tv) => {
 
-// for (let i = 0; i > tv.sold.length; i++){
-//
-// }
-
    return tv.sold;
 
 })
@@ -16,7 +12,6 @@ for(let i = 0; i < amountOfTvsSold.length; i++) {
 
 console.log(totalTvSold);
 
-// sum = 10
 
 // * **Opdracht 2b:** Zorg ervoor dat dit aantal _in het groen_ wordt weergegeven op de pagina.
 

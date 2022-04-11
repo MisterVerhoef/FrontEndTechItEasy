@@ -4,7 +4,7 @@
 //
 // const tvInfo = document.getElementById("tv-stuff");
 // tvInfo.textContent = tvName[2];
-
+//
 // function showListTvBrands(tvlist) {
 //     let list = document.getElementById("our-Tv-Brands-Again");
 //     tvlist.forEach((item) => {
@@ -22,7 +22,7 @@
 //   Philips 43PUS6504/12 - 4K TV
 //   €379,-
 //   43 inch (109 cm) | 50 inch (127 cm) | 58 inch (147 cm)
-//
+
 //   NIKKEI NH3216SMART - HD smart TV
 //   €159,-
 //   32 inch (81 cm)
@@ -34,8 +34,12 @@
 // of jouw functie ook werkt wanneer er een ander tv object wordt meegegeven.
 
 
+// const tvName = inventory.map((tv) => {
+//     return tv.brand + " " + tv.type + " - " + tv.name;
+// })
+
 const tvName = inventory.map((tv) => {
-    return tv.brand + " " + tv.type + " - " + tv.name;
+    return `${tv.brand} ${tv.type} - ${tv.name}`;
 })
 
 const tvInfo = document.getElementById("opdracht4a");
@@ -47,21 +51,23 @@ tvInfo.textContent = tvName[2];
 // wanneer er een andere tv-prijs wordt meegegeven.
 
 
+// function createPrice(tv) {
+//     let tvPrices = tv.map((t) => {
+//         return t.price;
+//     })
+// }
+
 
 
 // const tvPrice = inventory.map((tv) => {
 //     return "€" + tv.price + ",-";
 // })
 
-function tvPriceFormat(){
-    return "€" + tv.price + ",-";
-}
-
 const tvPrice = inventory.map((tv) => "€" + tv.price + ",-");
 
 
 const tvPriceInfo = document.getElementById("opdracht4b");
-tvPriceInfo.textContent = tvPrice[2];
+tvPriceInfo.textContent = tvPrice[1];
 
 
 // * **Opdracht 4c:** Zorg ervoor dat er een string wordt gegenereerd voor alle beschikbare schermgroottes van één tv, in
@@ -73,20 +79,84 @@ tvPriceInfo.textContent = tvPrice[2];
 //     Test of jouw functie werkt in alle mogelijke gevallen.
 //
 
-const sizeMakeup = inventory.map((tv) => tv.availableSizes + "inch" + "(" + (tv.availableSizes * 2.54) + " cm)" );
 
-console.log(sizeMakeup[4])
+// const tvSizeMakeUp = inventory.map((tv) => {
+//     return tv.availableSizes + " inch" + "(" + (tv.availableSizes * 2,54) + " cm)" ;
+// })
 
-// const tvSizeInfo = document.getElementById("opdracht4c");
-// tvSizeInfo.textContent = tvSizeMakeUp[3];
 
-// function tvSizeMakeUp(tv) { if tv.size return tv.availableSizes + "inch" + "(" + (tv.availableSizes * 2.54) + " cm)"  }
+
+
+
+    function tvSizeFormat(tv) {
+        let tvSizeMakeUp = ''
+        for (let i = 0; i < tv.length; i++) {
+            const inch = tv[i];
+            const cm = tv[i] * 2.54;
+            tvSizeMakeUp = tvSizeMakeUp + `${inch} inch ${cm} cm`;
+            if (i < tv.length - 1) {
+                tvSizeMakeUp = `${tvSizeMakeUp} | `;
+            }
+        }
+        return tvSizeMakeUp
+    }
+
+
+    const tvSizeInfo = document.getElementById("opdracht4c");
+    tvSizeInfo.innerHTML = `
+<p> ${tvSizeFormat(inventory[5].availableSizes)}</p>
+`;
+
+
+
 
 // * **Opdracht 4d:** Zorg ervoor de informatie van één van de tv's zoals het voorbeeld wordt weergegeven op de pagina.
-// Gebruik hiervoor de functies die je hebt gemaakt in opdracht 5a, 5b en 5c.
+// Gebruik hiervoor de functies die je hebt gemaakt in opdracht 4a, 4b en 4c.
 //
+
+
+
+const tvDetailsInfo = document.getElementById("opdracht4d");
+tvDetailsInfo.innerHTML = `
+<p>${tvName[5]} <br> ${tvPrice[5]} <br> ${tvSizeFormat(inventory[5].availableSizes)}</p>
+`;
+
 // * **Opdracht 4e:** Schrijf een functie die ALLE tv's weergeeft op de pagina zoals in het voorbeeld. Dit wil je
 // natuurlijk niet acht keer opnieuw schrijven, want nu zijn het 8 tv's, maar in de toekomst misschien wel 200!
 // Gebruik in deze functie de voorgaande functies die je hebt geschreven, om onderdelen van de data te formatten. De
 // overkoepelende "tv-generator-functie" verwacht één parameter: de volledige array met tv-objecten. Vergeet 'm niet aan
 // te roepen!
+
+function tvNameFormat(tvArray) {
+    const tvName = tvArray.map((tv) => {
+        return tv.brand + tv.type + tv.name;
+    })
+}
+
+tvNameFormat(inventory);
+
+function tvPriceList (tvList) {
+    const tvPrices = tvList.map((tv) => {
+        return ` €${tv.price},-`
+    });
+    infoTvBundles.innerHTML = `${tvPrices.join('|')}`;
+}
+
+
+
+
+//     function generateTvList(tvArray) {
+//         const infoTvBundles = document.getElementById('opdracht4e');
+//         const tvModels = tvArray.map((tv) => {
+//             return `
+//         <li>
+//         <p>${tvName(tv.name)}</p>
+//         <p>${tvPriceList(tv.price)}</p>
+//         <p>${tvSizeFormat(tv.availableSizes)}</p>
+//         </li>
+//         `
+//         });
+//         infoTvBundles.innerHTML = `${tvModels.join('')}`;
+//     }
+//
+// generateTvList(inventory);

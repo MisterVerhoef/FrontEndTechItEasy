@@ -9,11 +9,6 @@ const tvBrands = inventory.map((tv) => {
 
 console.log(tvBrands)
 
-// const showTvBrands = document.getElementById("ourTvBrands");
-// showTvBrands.innerHTML = `${tvBrands}`
-
-// let data = ["Ram", "Shyam", "Sita", "Gita"];
-
 let list = document.getElementById("our-Tv-Brands");
 
 tvBrands.forEach((item) => {
