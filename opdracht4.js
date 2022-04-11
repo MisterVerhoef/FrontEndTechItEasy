@@ -34,16 +34,18 @@
 // of jouw functie ook werkt wanneer er een ander tv object wordt meegegeven.
 
 
-// const tvName = inventory.map((tv) => {
-//     return tv.brand + " " + tv.type + " - " + tv.name;
-// })
 
-const tvName = inventory.map((tv) => {
+
+const tvDetails = inventory.map((tv) => {
     return `${tv.brand} ${tv.type} - ${tv.name}`;
 })
 
+function tvName (tv) {
+    return `${tv.brand} ${tv.type} - ${tv.name}`;
+}
+
 const tvInfo = document.getElementById("opdracht4a");
-tvInfo.textContent = tvName[2];
+tvInfo.textContent = tvDetails[2];
 
 //
 // * **Opdracht 4b:** Zorg ervoor dat de prijs van een tv netjes geformat wordt. Maak een functie die één tv-prijs als
@@ -51,17 +53,7 @@ tvInfo.textContent = tvName[2];
 // wanneer er een andere tv-prijs wordt meegegeven.
 
 
-// function createPrice(tv) {
-//     let tvPrices = tv.map((t) => {
-//         return t.price;
-//     })
-// }
 
-
-
-// const tvPrice = inventory.map((tv) => {
-//     return "€" + tv.price + ",-";
-// })
 
 const tvPrice = inventory.map((tv) => "€" + tv.price + ",-");
 
@@ -80,9 +72,7 @@ tvPriceInfo.textContent = tvPrice[1];
 //
 
 
-// const tvSizeMakeUp = inventory.map((tv) => {
-//     return tv.availableSizes + " inch" + "(" + (tv.availableSizes * 2,54) + " cm)" ;
-// })
+
 
 
 
@@ -118,7 +108,7 @@ tvPriceInfo.textContent = tvPrice[1];
 
 const tvDetailsInfo = document.getElementById("opdracht4d");
 tvDetailsInfo.innerHTML = `
-<p>${tvName[5]} <br> ${tvPrice[5]} <br> ${tvSizeFormat(inventory[5].availableSizes)}</p>
+<p>${tvDetails[5]} <br> ${tvPrice[5]} <br> ${tvSizeFormat(inventory[5].availableSizes)}</p>
 `;
 
 // * **Opdracht 4e:** Schrijf een functie die ALLE tv's weergeeft op de pagina zoals in het voorbeeld. Dit wil je
@@ -127,36 +117,24 @@ tvDetailsInfo.innerHTML = `
 // overkoepelende "tv-generator-functie" verwacht één parameter: de volledige array met tv-objecten. Vergeet 'm niet aan
 // te roepen!
 
-function tvNameFormat(tvArray) {
-    const tvName = tvArray.map((tv) => {
-        return tv.brand + tv.type + tv.name;
-    })
-}
 
-tvNameFormat(inventory);
-
-function tvPriceList (tvList) {
-    const tvPrices = tvList.map((tv) => {
-        return ` €${tv.price},-`
-    });
-    infoTvBundles.innerHTML = `${tvPrices.join('|')}`;
+function tvPriceList (price) {
+       return `€${price},-`
 }
 
 
+    function generateTvList(tvArray) {
+        const infoTvBundles = document.getElementById('opdracht4e');
+        const tvModels = tvArray.map((tv) => {
+            return `
+        <li>
+        <p>${tvName(tv)}</p>
+        <p>${tvPriceList(tv.price)}</p>
+        <p>${tvSizeFormat(tv.availableSizes)}</p>
+        </li>
+        `
+        });
+        infoTvBundles.innerHTML = `${tvModels.join('')}`;
+    }
 
-
-//     function generateTvList(tvArray) {
-//         const infoTvBundles = document.getElementById('opdracht4e');
-//         const tvModels = tvArray.map((tv) => {
-//             return `
-//         <li>
-//         <p>${tvName(tv.name)}</p>
-//         <p>${tvPriceList(tv.price)}</p>
-//         <p>${tvSizeFormat(tv.availableSizes)}</p>
-//         </li>
-//         `
-//         });
-//         infoTvBundles.innerHTML = `${tvModels.join('')}`;
-//     }
-//
-// generateTvList(inventory);
+generateTvList(inventory);

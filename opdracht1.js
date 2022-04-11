@@ -33,3 +33,11 @@ inventory.sort((a, b) => {
 })
 
 console.log(inventory.sort());
+
+function tvPriceSort (tvArray){
+    let priceList = [];
+    const sortedPrices = tvArray.sort((a, b) => {
+        return a.price - b.price;
+    })
+    return priceList;
+}
